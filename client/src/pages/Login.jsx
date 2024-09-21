@@ -1,13 +1,31 @@
 import React, { useState } from "react";
 
-import { Paper, Container, Typography, TextField, Button, Stack, Avatar, IconButton } from "@mui/material";
+import {
+  Paper,
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  Avatar,
+  IconButton,
+} from "@mui/material";
 
-import {CameraAlt as CameraAltIcon} from "@mui/icons-material";
+import { CameraAlt as CameraAltIcon } from "@mui/icons-material";
+import { VisuallyHiddenInput } from "../components/Styles/StyledComponents";
+
+import {useInputValidation} from "6pp"
 
 const Login = () => {
   const [IsLogin, setIsLogin] = useState(true);
 
   const ToggleLogined = () => setIsLogin((prev) => !prev);
+
+  const name=useInputValidation("")
+  const bio=useInputValidation("")
+  const username=useInputValidation("")
+  const Password=useInputValidation("")
+
   return (
     <Container
       component={"main"}
@@ -38,6 +56,8 @@ const Login = () => {
                 label="Username"
                 margin="normal"
                 variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler}
               />
 
               <TextField
@@ -46,6 +66,8 @@ const Login = () => {
                 label="Password"
                 margin="normal"
                 variant="outlined"
+                value={Password.value}
+                onChange={Password.changeHandler}
               />
 
               <Button
@@ -71,25 +93,37 @@ const Login = () => {
             </form>
           </>
         ) : (
-          // <span>Register</span
           <>
             <Typography variant="h5">Register</Typography>
             <form style={{ width: "100%", marginTop: "1rem" }}>
+              <Stack position={"relative"} width={"10rem"} margin={"auto"}>
+                <Avatar
+                  sx={{
+                    width: "10rem",
+                    height: "10rem",
+                    objectFit: "contain",
+                  }}
+                />
 
-              <Stack position={"relative"}  width={"10rem"} margin={'auto'}>
-                <Avatar sx={{
-                  width:"10rem",
-                  height:"10rem",
-                  objectFit:"contain"
-                }}>
-
-                  <IconButton>
-                  <CameraAltIcon>
-                    {/* <VisuallyHidden>Upload Avtar</VisuallyHidden> */}
-                  </CameraAltIcon>
-                  </IconButton>
-
-                </Avatar>
+                <IconButton
+                  sx={{
+                    position: "absolute",
+                    bottom: "0",
+                    right: "0",
+                    color: "white",
+                    bgcolor: "rgba(0,0,0,0.5)",
+                    ":hover": {
+                      bgcolor: "rgba(0,0,0,0.7)",
+                    },
+                  }}
+                  component="label"
+                >
+     
+     <CameraAltIcon />
+                      <VisuallyHiddenInput type="file" />
+          
+           
+                </IconButton>
               </Stack>
               <TextField
                 required
@@ -97,6 +131,9 @@ const Login = () => {
                 label="Name"
                 margin="normal"
                 variant="outlined"
+                value={name.value}
+                onChange={name.changeHandler}
+                
               />
 
               <TextField
@@ -105,6 +142,8 @@ const Login = () => {
                 label="Bio"
                 margin="normal"
                 variant="outlined"
+                value={bio.value}
+                onChange={bio.changeHandler}
               />
 
               <TextField
@@ -113,6 +152,8 @@ const Login = () => {
                 label="Username"
                 margin="normal"
                 variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler}
               />
 
               <TextField
@@ -121,6 +162,8 @@ const Login = () => {
                 label="Password"
                 margin="normal"
                 variant="outlined"
+                value={Password.value}
+                onChange={Password.changeHandler}
               />
 
               <Button
@@ -130,7 +173,7 @@ const Login = () => {
                 type="submit"
                 fullWidth
               >
-               SignUp
+                SignUp
               </Button>
               <Typography m={"1rem"} textAlign={"center"}>
                 OR
